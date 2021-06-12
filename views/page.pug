@@ -1,7 +1,51 @@
 extends layout
 
 block content
-  h1= title
-  p Welcome to #{title}
-  p#demo Here it will be present.
-  button(type='button' ,id='btn', onclick="myFunction()" ) Click.
+  h1   #{title}
+  h2  Codeforces 
+
+  -function time_convert(time){
+  - time = time/60;
+
+  -var days = Math.floor(time/1440);
+
+  -time = time%1440;
+
+  -var hour = Math.floor(time/60);
+  -var minute = time % 60;
+
+  -if(hour<10)
+  -hour = "0" + hour;
+  -console.log(minute);
+
+  -if(minute<10)
+  -minute = "0" + minute;
+  
+
+  -var ret="";
+  
+ 
+  -ret = hour + " : " + minute;
+
+
+  -return ret;
+  -}
+
+ 
+
+  table 
+    tr
+      th Contest Name
+      th Status
+      th Start-Time
+      th Duration
+    -for(var i=0;i<Codeforces.length;i++){
+    tr
+      
+      td #{Codeforces[i].name}
+        a(href = '#{Codeforce.url}')
+      td #{Codeforces[i].status}
+      - let dt=new Date(Codeforces[i].start_time);
+      td #{dt.toLocaleString("en-AU")} 
+      td #{time_convert(Codeforces[i].duration)}
+    -}
