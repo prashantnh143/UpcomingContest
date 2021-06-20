@@ -1,33 +1,119 @@
-body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+*{
+  margin:0px;
+  padding:0px;
 }
 
-a {
-  color: #00B7FF;
+h1{
+  color: white;
+  text-shadow: 2px 2px 4px #000000;
+}
+
+
+a:link{
+  color: #7468e4;
+  text-decoration: blue;
+}
+
+a:hover {
+  color: rgb(233, 35, 35);
+  text-decoration:underline;
 }
 
 table {
-  width: 90%;
-  border: 1px solid black;
+  width: 80%;
+  border: 2px solid black;
+ margin:10px 0px;
 
 }
 
 td{
-  margin: 2px;
+  margin: 4px;
   padding: 5px;
   text-align: center;
 }
 
-tr{
-
-}
-
 th{
-  height: 40px;
+  height: 30px;
   margin: 2px;
   padding: 5px;
 
 }
 tr:nth-child(even) {background-color: #f2f2f2;}
 tr:hover {background-color: #f5f5f5;}
+
+.container{
+  background: linear-gradient(#e66465, #9198e5);
+  width:100%;
+  padding:10px;
+  border:2px solid green;
+}
+
+.header{
+  height:50px;
+  width:70%;
+  
+  display:flex;
+  justify-content:center;
+}
+
+
+
+.force{
+ display:None;
+  width:90%;
+  
+  padding:50px;
+}
+
+.chef{
+  display:None;
+  width:90%;
+ 
+  padding:50px;
+}
+.code
+{
+  display:None;
+  width:90%;
+
+  padding:50px;
+}
+
+.coder{
+  display:None;
+  width:90%;
+  
+  padding:50px;
+}
+
+.earth{
+  display:None;
+  width:90%;
+  
+  padding:50px;
+}
+
+.start{
+  display:None;
+  width:90%;
+  
+  padding:50px;
+}
+
+button{
+  margin:auto;
+  height:30px;
+  border-radius:20px;
+  width:100px;
+  cursor:pointer;
+  background-color: #50e8704f;
+}
+
+button:active{
+  text-decoration: wavy;
+}
+
+button:hover{
+background-color:#d8a52e;
+cursor: pointer;
+}

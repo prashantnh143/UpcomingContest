@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 const fetch = require('node-fetch');
 
-var Codeforces,Codechef,Leetcode;
+var Codeforces,Codechef,Leetcode,Kickstart,Atcoder,Hackerearth;
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -41,8 +41,41 @@ router.get('/', function(req, res, next) {
         next(err);
     })
 
+    fetch('https://kontests.net/api/v1/at_coder')
+    .then(res => res.json())
+    .then(data => {
+      Atcoder = data;
+      // res.render('page',{ title: "Codeforces Upcoming Contest" , arr})
+    })
+    .catch(err =>{
+        console.log(err);
+        next(err);
+    })    
 
-  res.render('page', { title: 'Upcoming Contests' ,Codeforces, Codechef, Leetcode});
+    fetch('https://kontests.net/api/v1/kick_start')
+    .then(res => res.json())
+    .then(data => {
+      Kickstart = data;
+      // res.render('page',{ title: "Codeforces Upcoming Contest" , arr})
+    })
+    .catch(err =>{
+        console.log(err);
+        next(err);
+    })
+
+    fetch('https://kontests.net/api/v1/hacker_earth')
+    .then(res => res.json())
+    .then(data => {
+      Hackerearth = data;
+      // res.render('page',{ title: "Codeforces Upcoming Contest" , arr})
+    })
+    .catch(err =>{
+        console.log(err);
+        next(err);
+    })
+
+
+  res.render('page', { title: 'Upcoming Contests' ,Codeforces, Codechef, Leetcode,Kickstart,Atcoder,Hackerearth});
 });
 
 module.exports = router;
