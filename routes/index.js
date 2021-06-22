@@ -2,80 +2,37 @@ var express = require('express');
 var router = express.Router();
 const fetch = require('node-fetch');
 
-var Codeforces,Codechef,Leetcode,Kickstart,Atcoder,Hackerearth;
+
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
 
-    fetch('https://kontests.net/api/v1/codeforces')
-    .then(res => res.json())
-    .then(data => {
-      Codeforces = data;
-     // res.send(Codeforces[0])
-      // res.render('page',{ title: "Codeforces Upcoming Contest" , arr})
-    })
-    .catch(err =>{
-        console.log(err);
-        next(err);
-    })
+  async function fetchContestPages() {
+    const [CodeforcesResponse, CodechefResponse,LeetcodeResponse,KickstartResponse,AtcoderResponse,HackerearthResponse] = await Promise.all([
+      fetch('https://kontests.net/api/v1/codeforces'),
+      fetch('https://kontests.net/api/v1/code_chef'),
+      fetch('https://kontests.net/api/v1/leet_code'),
+      fetch('https://kontests.net/api/v1/kick_start'),
+      fetch('https://kontests.net/api/v1/at_coder'),
+      fetch('https://kontests.net/api/v1/hacker_earth'),
+    ]);
+  
+    const Codeforces = await CodeforcesResponse.json();
+    const Codechef = await CodechefResponse.json();
+    const Leetcode = await LeetcodeResponse.json();
+    const Kickstart = await KickstartResponse.json();
+    const Atcoder = await AtcoderResponse.json();
+    const Hackerearth = await HackerearthResponse.json();
+    
 
-    fetch('https://kontests.net/api/v1/code_chef')
-    .then(res => res.json())
-    .then(data => {
-      Codechef = data;
-      // res.render('page',{ title: "Codeforces Upcoming Contest" , arr})
-    })
-    .catch(err =>{
-        console.log(err);
-        next(err);
-    })
-
-    fetch('https://kontests.net/api/v1/leet_code')
-    .then(res => res.json())
-    .then(data => {
-      Leetcode = data;
-      // res.render('page',{ title: "Codeforces Upcoming Contest" , arr})
-    })
-    .catch(err =>{
-        console.log(err);
-        next(err);
-    })
-
-    fetch('https://kontests.net/api/v1/at_coder')
-    .then(res => res.json())
-    .then(data => {
-      Atcoder = data;
-      // res.render('page',{ title: "Codeforces Upcoming Contest" , arr})
-    })
-    .catch(err =>{
-        console.log(err);
-        next(err);
-    })    
-
-    fetch('https://kontests.net/api/v1/kick_start')
-    .then(res => res.json())
-    .then(data => {
-      Kickstart = data;
-      // res.render('page',{ title: "Codeforces Upcoming Contest" , arr})
-    })
-    .catch(err =>{
-        console.log(err);
-        next(err);
-    })
-
-    fetch('https://kontests.net/api/v1/hacker_earth')
-    .then(res => res.json())
-    .then(data => {
-      Hackerearth = data;
-      // res.render('page',{ title: "Codeforces Upcoming Contest" , arr})
-    })
-    .catch(err =>{
-        console.log(err);
-        next(err);
-    })
-
-
-  res.render('index', { title: 'Upcoming Contests' ,Codeforces, Codechef, Leetcode,Kickstart,Atcoder,Hackerearth});
+    return [Codeforces,Codechef,Leetcode,Kickstart,Atcoder, Hackerearth];
+  }
+  
+  fetchContestPages().then(([Codeforces,Codechef,Leetcode,Kickstart,Atcoder, Hackerearth]) => {
+     res.render('index',{title : 'Upcoming Contest' ,Codeforces,Codechef,Leetcode,Kickstart,Atcoder, Hackerearth });
+  }).catch(error => {
+    next();
+  });
 });
 
 module.exports = router;
